@@ -1,0 +1,17 @@
+{
+    "contents" : "#install.packages(\"tm\");\n#install.packages(\"tmcn\", repos=\"http://R-Forge.R-project.org\");\n\nlibrary(tm)\nlibrary(tmcn)\n\n#按目录读入语料库\nC000007 <- Corpus(\n  DirSource(\n    'SogouC.mini/Sample/C000007'\n  ), \n  readerControl = list(language=\"UTF-8\")\n)\n\nstopwordsCN()\n\nlibrary(Rwordseg)\n\nC000007 <- tm_map(C000007, stripWhitespace)\nC000007 = tm_map(C000007, content_transformer(segmentCN), returnType='tm')\n\ncontrol = list(\n  wordLengths = c(1, 4),\n  stopwords = stopwordsCN()\n)\n\n#转成向量矩阵\nmt <- TermDocumentMatrix(C000007, control=control)\nmt$dimnames\ndmt <- as.matrix(mt)\nfix(dmt)\n\n#install.packages(\"wordcloud\")\nlibrary(wordcloud)\nv <- sort(rowSums(dmt), decreasing = TRUE)\nd <- data.frame(word = names(v), freq = v)\nwordcloud(\n  d$word, \n  d$freq, \n  min.freq=3, \n  random.order=F, \n  colors=rainbow(length(row.names(dmt)))\n)",
+    "created" : 1452132214496.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "722008689",
+    "id" : "CAB451EE",
+    "lastKnownWriteTime" : 1452136924,
+    "path" : "D:/RDM/2.1/tmDemo.R",
+    "project_path" : "tmDemo.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

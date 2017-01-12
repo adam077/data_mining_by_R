@@ -1,0 +1,17 @@
+{
+    "contents" : "library(nnet) \n\ndata <- read.csv(\"customers.csv\")\nfor(colName in names(data)) {\n  data <- data[data[, colName]!='NULL', ]\n}\n\nwrite.csv(data, file=\"data.csv\", row.names=FALSE, quote=FALSE)\ndata <- read.csv(\"data.csv\")\n\ndata <- data[, colnames(data)!='CustomerID']\n\nmmFormula <- ~ .;\nmodelData <- model.matrix(mmFormula, data)\ndata <- as.data.frame(modelData[, -1])\nnames(data)\n\ntotal <- nrow(data)\nindex <- sample(1:total, total*0.7)\n\ndata.train <- data[index, ]\ndata.test <- data[-index, ]\n\nformula <- Home.OwnershipRent ~ .;\ndata.train.nnet = nnet(\n  formula = formula, \n  data = data.train,\n  size = 3,\n  decay = 0.1, \n  linout = T, \n  trace = F\n)\n\ndata.test.predict <- predict(\n  data.train.nnet, \n  newdata = data.test\n)\n\ndata.test.predict <- ifelse(data.test.predict>0.5, \"Rent\", \"Own\")\n\ntable(data.test$Home.Ownership, data.test.predict)\nprop.table(table(data.test$Home.Ownership, data.test.predict), 1)\n",
+    "created" : 1453170421440.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3304696782",
+    "id" : "DEA0893",
+    "lastKnownWriteTime" : 1453171820,
+    "path" : "D:/RDM/3.5/code2.R",
+    "project_path" : "code2.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

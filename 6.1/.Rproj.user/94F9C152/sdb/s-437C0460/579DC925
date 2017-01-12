@@ -1,0 +1,17 @@
+{
+    "contents" : "x <- -10:10\npar(mfrow=c(3, 2))\n\ny <- 3*x + 1\nplot(x, y, type = \"l\")\n\ny <- -3*x +1\nplot(x, y, type = \"l\")\n\ny <- 3^x\nplot(x, y, type = \"l\")\n\ny <- -3^x\nplot(x, y, type = \"l\")\n\ny <- 3*x^2 + 3*x + 2\nplot(x, y, type = \"l\")\n\ny <- -3*x^2 + 3*x + 2\nplot(x, y, type = \"l\")\n",
+    "created" : 1455940630945.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "646594420",
+    "id" : "579DC925",
+    "lastKnownWriteTime" : 1455936236,
+    "path" : "D:/微云同步盘/421747587/课程/R数据挖掘实战（挖掘篇）/第六章 时间序列分析/6.1 趋势分析/CODE/0.R",
+    "project_path" : "0.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "data <- read.csv(\"data2.csv\", fileEncoding = \"UTF8\")\n\nfreq <- spec.pgram(data$总销量, taper=0, log='no', plot=FALSE);\n\nstart <- which(freq$spec==max(freq$spec))\nfrequency <- 1/freq$freq[which(freq$spec==max(freq$spec))]\n\n\ndata$均值 <- data$总销量/data$分店数\n\nfreq <- spec.pgram(data$均值, taper=0, log='no', plot=FALSE);\n\nstart <- which(freq$spec==max(freq$spec))\nfrequency <- 1/freq$freq[which(freq$spec==max(freq$spec))]\n\nplot(data$均值, type='l')\n\nmeanTS <- ts(\n  data$均值[start:length(data$均值)], \n  frequency=frequency\n) \nts.plot(meanTS)\n\nmeanTSdecompose <- decompose(meanTS)\nplot(meanTSdecompose)\n\n#趋势分解\nmeanTSdecompose$trend\n#季节性分解数据\nmeanTSdecompose$seasonal\n#随机部分\nmeanTSdecompose$random\n",
+    "created" : 1456110663035.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4137947695",
+    "id" : "BDB591A3",
+    "lastKnownWriteTime" : 1456111293,
+    "path" : "D:/RDM/6.2/2.R",
+    "project_path" : "2.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

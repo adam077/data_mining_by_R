@@ -1,0 +1,17 @@
+{
+    "contents" : "#install.packages(\"party\")\nlibrary(party)\n\ndata <- read.csv(\"data.csv\")\n\nformula <- CollegePlans ~ Gender+ParentIncome+IQ+ParentEncouragement\n#CollegePlans ~ .\n\nCollegePlansTree <- ctree(formula, data=data)\nplot(CollegePlansTree)\nplot(CollegePlansTree, type=\"simple\")\n\n\nsubData <- data[data$ParentIncome>67410 & data$ParentEncouragement=='Encouraged', ]\nprop.table(table(subData$CollegePlans))\n\n#交叉验证\ntotal <- nrow(data)\n\nindex <- sample(1:total, total*0.7)\n\ndata.train <- data[index, ]\ndata.test <- data[-index, ]\n\nCollegePlansTree <- ctree(formula, data=data.train)\n\ndata.test.predict <- predict(CollegePlansTree, newdata=data.test)\n\nprop.table(table(data.test$CollegePlans, data.test.predict), 1)\n",
+    "created" : 1452647842705.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2025864521",
+    "id" : "3FBB159F",
+    "lastKnownWriteTime" : 1452648939,
+    "path" : "D:/RDM/3.2/party.R",
+    "project_path" : "party.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

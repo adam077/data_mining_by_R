@@ -1,0 +1,17 @@
+{
+    "contents" : "#install.packages('fpc')\n\nlibrary('fpc')\n\ndata <- read.csv('data.csv')\nplot(data[, 1], data[, 2])\n\n# 用K均值聚类\nmodel1 <- kmeans(data, centers=2)\nplot(data[, 1], data[, 2], col=model1$cluster)\n\n# 用fpc包中的dbscan函数进行密度聚类\nmodel2 <- dbscan(data, eps=0.2, MinPts=5)\nplot(data[, 1], data[, 2], col=model2$cluster)\n",
+    "created" : 1454037404706.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1906540288",
+    "id" : "B1FFA4D1",
+    "lastKnownWriteTime" : 1454037874,
+    "path" : "D:/RDM/4.3/code2.R",
+    "project_path" : "code2.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

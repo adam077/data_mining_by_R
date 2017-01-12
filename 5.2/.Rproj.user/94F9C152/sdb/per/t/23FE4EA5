@@ -1,0 +1,17 @@
+{
+    "contents" : "library(recommenderlab)\n\ndata <- read.csv('data.csv')\n\nrm <- as(data, \"realRatingMatrix\")\n\nrec <- Recommender(\n  rm, \n  method=\"UBCF\", \n  parameter=list(\n    method=\"euclidean\",\n    nn=3\n  )\n)\n\npre <- predict(rec, rm, n=1)\n\nas(pre, 'list')\n",
+    "created" : 1454472098279.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3072314776",
+    "id" : "23FE4EA5",
+    "lastKnownWriteTime" : 1454472562,
+    "path" : "D:/RDM/5.2/1.R",
+    "project_path" : "1.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

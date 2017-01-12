@@ -1,0 +1,17 @@
+{
+    "contents" : "data <- read.csv('data.csv')\n\nplot(data[, 1], data[, 2])\n\neps <- 0.2;\nMinPts <- 5;\n\nd <- as.matrix(dist(data))\n\n#将所有点标记为核心点、边界点或噪声点\nps <- data.frame(index=c(NA), density=c(NA), type=c(NA))\nfor(i in 1:nrow(data)) {\n  #i <- 1;\n  index <- which(d[i, ]<eps)\n  #密度,空间中任意一点的密度是以该点为圆心、以 Eps 为半径的圆区域内包含的点数\n  density <- length(index);\n  if(density>MinPts) {\n    #核心点（Core Points）\n    #空间中某一点的密度，如果大于某一给定阈值MinPts，则称该为核心点\n    ps[i, ] <- c(i, density, 1)\n  } else if(density>1) {\n    #边界点（Border Points）\n    #空间中某一点的密度，如果小于某一给定阈值MinPts，则称该为边界点\n    ps[i, ] <- c(i, density, 2)\n  } else {\n    #噪声点（Noise Points）\n    #数据集中不属于核心点，也不属于边界点的点，也就是密度值为1的点\n    ps[i, ] <- c(i, density, 0)\n  }\n}\n\n#把噪声点过滤掉，因为噪声点无法聚类，它们独自一类\ncorePoints <- data[which(ps$type!=0), ]\ncoreDists <- as.matrix(dist(corePoints))\n\n#首先，把每个点的领域都作为一类\n#邻域（Neighborhood）\n#空间中任意一点的邻域是以该点为圆心、以 Eps 为半径的圆区域内包含的点集合\ncluster <- list();\nfor(i in 1:nrow(coreDists)) {\n  cluster[[i]] <- names(which(coreDists[i, ]<eps));\n}\n\n#然后，将有交集的领域，都合并为新的领域\nfor(i in 1:length(cluster)) {\n  for(j in 1:length(cluster)) {\n    if(any(cluster[[j]] %in% cluster[[i]]) && i!=j) {\n      if(ps[cluster[[i]][1], ]$type==1 && ps[cluster[[i]][2], ]$type==1) {\n        cluster[[i]] <- unique(append(cluster[[i]], cluster[[j]]))\n        cluster[[j]] <- list();\n      }\n    }\n  }\n}\n\n#最后，找出独立（也就是没有交集）的领域，就是我们最后的聚类的结果了\nresult <- list();\nfor(i in 1:length(cluster)) {\n  if(length(cluster[[i]])>0) {\n    result[[length(result)+1]] <- cluster[[i]]\n  }\n}\n\n#找出每个点所在领域的序号，作为他们最后聚类的结果标记\nfor(i in 1:length(result)) {\n  for(j in result[[i]]) {\n    data[j, 3] <- i\n  }\n}\n\nplot(data[, 1], data[, 2], col=data[,3])\n",
+    "created" : 1454035493724.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1305109532",
+    "id" : "AE2EBA15",
+    "lastKnownWriteTime" : 1454036385,
+    "path" : "D:/RDM/4.3/code1.R",
+    "project_path" : "code1.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

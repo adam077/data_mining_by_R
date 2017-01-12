@@ -1,0 +1,17 @@
+{
+    "contents" : "data <- read.transactions(\n  \"data.csv\", \n  format = \"single\", \n  cols = c(1,2), \n  sep=',', \n  skip=1\n)\ninspect(data)\n\ndata2 <- read.transactions(\n  \"data2.txt\", \n  format=\"basket\", \n  sep=\",\", \n  skip = 1\n)\ninspect(data2)\n\nrules <- apriori(data)\ninspect(rules)\n\nrules <- apriori(\n  data, \n  parameter=list(\n    support=0.5, \n    confidence=0.5\n  )\n)\ninspect(rules)\n",
+    "created" : 1454290496170.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3885836167",
+    "id" : "5CAF3414",
+    "lastKnownWriteTime" : 1454300018,
+    "path" : "D:/RDM/5.1/1.R",
+    "project_path" : "1.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "pColumns <- c('Sepal.Length', 'Sepal.Width', 'Petal.Length', 'Petal.Width');\n\ndata <- iris[ , pColumns]\n\ndata.e <- dist(data)\n\ndata.m <- as.matrix(data.e)\n\nmodel <- hclust(data.e)\n\nplot(model)\n\nresult <- cutree(model, k=3)\n\ntable(iris[, 5], result)\n",
+    "created" : 1453863057533.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3262021160",
+    "id" : "44B60474",
+    "lastKnownWriteTime" : 1453863476,
+    "path" : "D:/RDM/4.2/1.R",
+    "project_path" : "1.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

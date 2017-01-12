@@ -1,0 +1,17 @@
+{
+    "contents" : "data <- read.csv(\"customers.csv\")\n\n#清洗一些空值\ntable(data$Gender)\ntable(data$Marital.Status)\ndata <- data[data$Gender!='NULL' & data$Marital.Status!='NULL',]\n\ndata$Gender <- factor(data$Gender)\ndata$Marital.Status <- factor(data$Marital.Status)\n\nmmFormula <- ~ Home.Ownership + Education.Level + Gender + Marital.Status;\ntable(data$Home.Ownership)\nmodelData <- model.matrix(mmFormula, data)\ncolnames(modelData)\n\ndata <- modelData[, -1]\ndata <- as.data.frame(modelData[, -1])\n\ntotal <- nrow(data)\nindex <- sample(1:total, total*0.7)\n\ndata.train <- data[index, ]\ndata.test <- data[-index, ]\n\ndata.train.glm = glm(\n  formula = Home.OwnershipRent ~ ., \n  data = data.train,\n  family='binomial'\n)\n\ndata.test.predict <- predict(\n  data.train.glm, \n  newdata = data.test,\n  type=\"response\"\n)\n\ndata.test.predict <- ifelse(data.test.predict>0.5, \"Rent\", \"Own\")\n\ntable(data.test$Home.Ownership, data.test.predict)\n",
+    "created" : 1453083552818.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1529971314",
+    "id" : "9FFD1588",
+    "lastKnownWriteTime" : 1453084165,
+    "path" : "D:/RDM/3.4/code1.R",
+    "project_path" : "code1.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

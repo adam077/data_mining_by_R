@@ -1,0 +1,17 @@
+{
+    "contents" : "data <- read.csv(\"data.csv\", fileEncoding=\"UTF8\")\n#data <- read.csv(\"data.csv\", fileEncoding=\"UTF8\", stringsAsFactors=FALSE)\n\ndatas <- split(data, data$广告商)\n\npar(mfrow=c(1, 1))\n\nplot(\n  data$销售量\n)\n\ndatas[[1]]$month <- 1:12\n\ndata.model <- nls(\n  销售量 ~ A*month + B, \n  start=list(A=1, B=1), \n  data=datas[[1]], \n  trace=T\n)\n\nlines(\n  datas[[1]]$month, \n  17.36*datas[[1]]$month + 174.14\n)\n\ndata.model <- nls(\n  销售量 ~ A^month, \n  start=list(A=1), \n  data=datas[[1]], \n  trace=T\n)\n\nlines(\n  datas[[1]]$month, \n  1.685^datas[[1]]$month\n)\n\n\ndata.model <- nls(\n  销售量 ~ A*month^2 + B*month + C, \n  start=list(A=1, B=1, C=1), \n  data=datas[[1]], \n  trace=T\n)\n\nlines(\n  datas[[1]]$month, \n  -0.1469*datas[[1]]$month^2 + 19.2727*datas[[1]]$month + 169.6818 \n)\n\n",
+    "created" : 1455943533731.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "180355309",
+    "id" : "1BD1A060",
+    "lastKnownWriteTime" : 1455943809,
+    "path" : "D:/RDM/6.1/1.R",
+    "project_path" : "1.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

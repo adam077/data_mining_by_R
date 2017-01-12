@@ -1,0 +1,17 @@
+{
+    "contents" : "#install.packages(\"class\");\nlibrary(class)\n\ntotal <- nrow(iris);\nindex <-sample(1:total, total*0.7)\n\niris.train <- iris[index, ]\niris.test <- iris[-index, ]\n\nresult.KNN <-knn(\n  train=subset(iris.train, select=-Species), \n  test=subset(iris.test,select=-Species), \n  cl=iris.train$Species, k=3\n)\n\ntable(iris.test$Species, result.KNN)\n",
+    "created" : 1452562326812.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "957086529",
+    "id" : "E1AB387B",
+    "lastKnownWriteTime" : 1452565533,
+    "path" : "D:/RDM/3.1/1.R",
+    "project_path" : "1.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

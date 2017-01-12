@@ -1,0 +1,17 @@
+{
+    "contents" : "#install.packages(\"klaR\")\nlibrary(klaR)\n\ndata <- read.csv(\"data.csv\")\n\ntotal <- nrow(data)\n\nindex <- sample(1:total, total*0.7)\n\ndata.train <- data[index, ]\ndata.test <- data[-index, ]\n\nformula=CollegePlans ~ Gender + ParentIncome + IQ + ParentEncouragement\nmodel <- NaiveBayes(formula, data.train)\ndata.test.predict <- predict(model, newdata = data.test)\n\nprop.table(table(data.test$CollegePlans, data.test.predict$class), 1)\n",
+    "created" : 1452818383230.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4242396839",
+    "id" : "245AB6AC",
+    "lastKnownWriteTime" : 1452818981,
+    "path" : "D:/RDM/3.3/demo.R",
+    "project_path" : "demo.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

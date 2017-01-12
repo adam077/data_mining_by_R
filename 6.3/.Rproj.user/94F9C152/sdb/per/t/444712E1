@@ -1,0 +1,18 @@
+{
+    "contents" : "#install.packages('forecast')\nlibrary(forecast)\n\ndata <- read.csv(\"data.csv\", fileEncoding=\"UTF8\")\ndata$均值 <- data$总销量/data$分店数\n\nplot(data$均值, type='l')\n\nfreq <- spec.pgram(data$均值, taper=0, log='no', plot=FALSE);\n\nstart <- which(freq$spec==max(freq$spec))\nfrequency <- 1/freq$freq[which(freq$spec==max(freq$spec))]\n\nmeanTS <- ts(\n  data$均值[start:length(data$均值)], \n  frequency=frequency\n)\n\nmeanARIMA = auto.arima(meanTS)\nmeanARIMAForecast = forecast(meanARIMA, h=7);\nmeanARIMAForecast$mean\n\nplot(meanARIMAForecast)",
+    "created" : 1456062153830.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "571155673",
+    "id" : "444712E1",
+    "lastKnownWriteTime" : 1456279582,
+    "path" : "D:/RDM/6.3/1.R",
+    "project_path" : "1.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

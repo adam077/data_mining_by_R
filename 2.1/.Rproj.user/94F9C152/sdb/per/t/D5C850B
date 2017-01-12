@@ -1,0 +1,17 @@
+{
+    "contents" : "install.packages(\"rJava\")\ninstall.packages(\"Rwordseg\", repos=\"http://R-Forge.R-project.org\")\n#install.packages(\"Rwordseg\", repos=\"http://R-Forge.R-project.org\", type=\"source\")\n\nlibrary(Rwordseg)\n\nd <- segmentCN(\"R数据挖掘实战\")\n\nsegmentCN(\"真武七截阵和天罡北斗阵哪个厉害\")\n\ninstallDict('金庸武功招式.scel', '金庸武功招式')\n\nsegmentCN(\"真武七截阵和天罡北斗阵哪个厉害\")\n\nuninstallDict('金庸武功招式')\n\ndata <- segmentCN(\n  'SogouC.mini/Sample/C000007/10.txt'\n)\n",
+    "created" : 1452133419555.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2322132474",
+    "id" : "D5C850B",
+    "lastKnownWriteTime" : 1452134523,
+    "path" : "D:/RDM/2.1/RwordsegDemo.R",
+    "project_path" : "RwordsegDemo.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "data <- read.csv(\"customers.csv\")\ndata <- data[data$Gender!='NULL' & data$Marital.Status!='NULL',]\ndata <- data[, colnames(data)!='CustomerID']\n\nformula <- Home.Ownership ~ .;\n\ntotal <- nrow(data)\nindex <- sample(1:total, total*0.7)\n\ndata.train <- data[index, ]\ndata.test <- data[-index, ]\n\ndata.train.glm = glm(\n  formula = formula, \n  data = data.train,\n  family='binomial'\n)\n\ndata.test.predict <- predict(\n  data.train.glm, \n  newdata = data.test,\n  type=\"response\"\n)\n\ndata.test.predict <- ifelse(data.test.predict>0.5, \"Rent\", \"Own\")\n\ntable(data.test$Home.Ownership, data.test.predict)\nprop.table(table(data.test$Home.Ownership, data.test.predict), 1)\n",
+    "created" : 1453084273451.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "520639233",
+    "id" : "8B48652C",
+    "lastKnownWriteTime" : 1453084629,
+    "path" : "D:/RDM/3.4/code2.R",
+    "project_path" : "code2.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

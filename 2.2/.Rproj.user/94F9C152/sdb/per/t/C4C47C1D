@@ -1,0 +1,17 @@
+{
+    "contents" : "library(tm)\nlibrary(tmcn)\nlibrary(Rwordseg)\n\ndocs <- Corpus(\n  DirSource(\n    c(\n      \"SogouC.mini/Sample/C000007\", \"SogouC.mini/Sample/C000008\",\n      \"SogouC.mini/Sample/C000010\", \"SogouC.mini/Sample/C000013\",\n      \"SogouC.mini/Sample/C000014\", \"SogouC.mini/Sample/C000016\",\n      \"SogouC.mini/Sample/C000020\", \"SogouC.mini/Sample/C000022\",\n      \"SogouC.mini/Sample/C000023\", \"SogouC.mini/Sample/C000024\"\n    )\n  ),\n  readerControl = list(\n    language='UTF-8'\n  )\n)\n#移除空白\ndocs <- tm_map(docs, stripWhitespace)\n#移除标点\ndocs <- tm_map(docs, removePunctuation)\n\ndocs <- tm_map(docs, content_transformer(segmentCN), returnType=\"tm\")\n\ntdm <- TermDocumentMatrix(\n  docs, \n  control = list(\n    wordLengths= c(1, 4),\n    stopwords = stopwordsCN()\n  )\n)\n\nTF <- as.matrix(tdm)\n\nIDF <- apply(TF, 1, function(row) {\n  return (log2(length(docs)/(sum(ifelse(row>0, 1, 0))+1)))\n});\n\nTF.IDF = TF*IDF\n\nkeywords <- apply(TF.IDF, 2, function(col) {\n  keyword <- col[order(col, decreasing=TRUE)][1:5];\n  return(names(keyword))\n})\n#获取每篇文章关键字所在的位置，\n#这样子就可以获取对应的TF、IDF以及TF.IDF的值了\nkeywordIndexes <- apply(TF.IDF, 2, function(col) {\n  index <- order(col, decreasing=TRUE)[1:5];\n  return(index)\n})\n\nTF[keywordIndexes[, 1], 1]\nIDF[keywordIndexes[, 1]]\nTF.IDF[keywordIndexes[, 1], 1]\n",
+    "created" : 1452216499489.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1666081762",
+    "id" : "C4C47C1D",
+    "lastKnownWriteTime" : 1452223447,
+    "path" : "D:/RDM/2.2/code.R",
+    "project_path" : "code.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

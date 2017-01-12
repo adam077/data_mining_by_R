@@ -1,0 +1,17 @@
+{
+    "contents" : "library(nnet)\n\ndata <- read.csv(\"customers.csv\");\ndata <- data[\n    data$Gender!='NULL' & \n    data$Marital.Status!='NULL' &\n    data$Home.Ownership!='NULL' &\n    data$Education.Level!='NULL',\n  ];\n\ndata$Gender <- factor(data$Gender)\ndata$Marital.Status <- factor(data$Marital.Status)\ndata$Home.Ownership <- factor(data$Home.Ownership)\ndata$Education.Level <- factor(data$Education.Level)\n\nmmFormula <- ~ Home.Ownership + Education.Level + Gender + Marital.Status;\n\nmodelData <- model.matrix(mmFormula, data)\ncolnames(modelData)\n\ndata <- as.data.frame(modelData[, -1])\n\ntotal <- nrow(data)\nindex <- sample(1:total, total*0.7)\n\ndata.train <- data[index, ]\ndata.test <- data[-index, ]\n\nnames(data)\n\ndata.train.nnet = nnet(\n  formula = Home.OwnershipRent ~ ., \n  data = data.train,\n  size = 10,\n  decay = 0.1,\n  linout = T, \n  trace = F\n)\n\ndata.test.predict <- predict(\n  data.train.nnet, \n  newdata = data.test\n)\n\ndata.test.predict <- ifelse(data.test.predict>0.5, \"Rent\", \"Own\")\n\ntable(data.test$Home.Ownership, data.test.predict)\n",
+    "created" : 1453169544948.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1858099194",
+    "id" : "9692D218",
+    "lastKnownWriteTime" : 1453171650,
+    "path" : "D:/RDM/3.5/code1.R",
+    "project_path" : "code1.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
